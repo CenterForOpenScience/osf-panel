@@ -1,3 +1,10 @@
+/**
+ * osf-panel - Smart panels that show and hide bootstrap columns
+ * @author Caner Uguz
+ * @version v0.0.1
+ * @link https://github.com/caneruguz/osf-panel
+ * @license Apache 2.0
+ */
 (function($) {
     $.fn.osfPanel = function(options) {
         var settings = $.extend({                                       // Default options
