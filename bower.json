@@ -1,12 +1,12 @@
 {
   "name": "osf-panel",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "homepage": "https://github.com/caneruguz/osf-panel",
   "authors": [
     "Caner Uguz <caneruguz@gmail.com>"
   ],
   "description": "Smart panels that show and hide bootstrap columns",
-  "main": "dist/osf-panel.js",
+  "main": "dist/jquery-osfPanel.js",
   "keywords": [
     "Bootstrap",
     "columns",
