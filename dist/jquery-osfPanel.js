@@ -45,16 +45,15 @@
             var each = 12/open; 
             var colCSS = 'col-' + currentMode + '-' + each;
             el.each(function(index, element){
-            // remove pertinent css
-            var cssStrings = $(element).attr('class').split(' ');
-            for(var i = 0; i < cssStrings.length; i++){
-                if(cssStrings[i].indexOf('col-' + currentMode + '-'));
-                cssStrings.splice(i, 1);
-            }
-            $(element).attr('class', cssStrings.join(' ')); 
-
-            $(element).addClass(colCSS);
-            })
+                //remove pertinent css
+                var cssStrings = $(element).attr('class').split(' ');
+                for(var i = 0; i < cssStrings.length; i++){
+                    if(cssStrings[i].indexOf('col-' + currentMode + '-'));
+                    cssStrings.splice(i, 1);
+                }
+                $(element).attr('class', cssStrings.join(' '));
+                $(element).addClass(colCSS);
+            });
         }
         
         // Set some variables in the very beginning for consistency
@@ -63,7 +62,18 @@
                 if($(element).is(':visible')){
                     $(element).attr('data-osf-toggle', 'on');
                 }
-                $(element).attr('data-css-cache', $(element).attr('class')); 
+                $(element).attr('data-css-cache', $(element).attr('class'));
+                //remove all size related classes
+                var cssStrings = $(element).attr('class').split(' ');
+                console.log(cssStrings);
+                for(var i = 0; i < cssStrings.length; i++){
+                    console.log(cssStrings[i]);
+
+                    if ( cssStrings[i].match( /(col-xs-|col-sm-|col-md-|col-lg)/ ) ) {
+                        cssStrings[i] = '';
+                    }
+                }
+                $(element).attr('class', cssStrings.join(' '));
             });
             el.createButtons();
         }
@@ -102,7 +112,7 @@
                     } 
                     $(settings.buttonElement + ' > .btn-group').append('<div class="btn ' + btnClass +'">' + title + '</div>')
                 })
-                el.adjustVisible();                
+                el.adjustVisible();
             } else {
                 el.reset();
             }
