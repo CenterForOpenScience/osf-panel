@@ -6,7 +6,8 @@
             buttonElement : ".switch",                                  // Where to place the buttons
             onClass : 'btn-primary',                                    // The class to add to buttons for ON
             offClass : 'btn-default',                                   // The class to add to buttons for OFF
-            onSize : 'sm'                                               // Which size onwards to apply 
+            onSize : 'sm',                                               // Which size onwards to apply
+            onclick : null                                              // onclick function hook
         }, options),
             el = this,                                                      // The elements this was called on. This is a list, should run .each().
             modes = ['xs', 'sm', 'md', 'lg'],
@@ -151,7 +152,7 @@
         }
 
         // Button on click
-        $(document).on('click', settings.buttonElement + ' .btn', function(){
+        $(document).on('click', settings.buttonElement + ' .btn', function(event){
             var $this = $(this);
             // toggle what is clicked
             var title = $this.text();
@@ -164,6 +165,9 @@
                 $('[data-osf-panel="' + title + '"]').attr('data-osf-toggle', 'on').show();                
             }
             el.adjustVisible();
+            if ( $.isFunction(settings.onclick ) ) {
+                settings.onclick.call(el, $this, event);
+            }
         });
          
          
@@ -172,7 +176,6 @@
         });
         
         el.initialize();
-
 
         // Run the complete function if there is one
         if ( $.isFunction(settings.complete ) ) {
