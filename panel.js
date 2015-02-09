@@ -79,6 +79,7 @@
             console.log(currentMode);
             if(modes.indexOf(currentMode) >= modes.indexOf(settings.onSize)){
                 $(settings.buttonElement).append('<div class="btn-group btn-group-sm"></div>');
+                $(settings.buttonElement + ' > .btn-group').append('<div class="btn btn-default disabled">Toggle view: </div>')
                 el.each(function(index, element){
                     var btnClass = settings.offClass; 
                     var title = $(element).attr('data-osf-panel');
