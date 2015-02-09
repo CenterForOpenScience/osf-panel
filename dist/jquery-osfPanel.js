@@ -41,10 +41,20 @@
         // Adjust the widths of the visible columns
         el.adjustVisible = function(){
             // how many are still open? 
-            var open = $('[data-osf-panel]:visible').length; 
-            var each = 12/open; 
-            var colCSS = 'col-' + currentMode + '-' + each;
+            var open = $('[data-osf-panel]:visible').length;
+
+            var fixedSizes = [];
+            var fixedSizeTotals = 0;
+            var openFixed = 0;
+            var fixedSizeExists = false;
             el.each(function(index, element){
+                var colsize  = $(element).attr('data-osf-panel-col');
+                fixedSizes[index] = colsize;
+                if(colsize && $(element).css('display') !== 'none') {
+                    fixedSizeExists = true;
+                    fixedSizeTotals += parseInt(colsize);
+                    openFixed++;
+                }
                 //remove pertinent css
                 var cssStrings = $(element).attr('class').split(' ');
                 for(var i = 0; i < cssStrings.length; i++){
@@ -52,8 +62,34 @@
                     cssStrings.splice(i, 1);
                 }
                 $(element).attr('class', cssStrings.join(' '));
-                $(element).addClass(colCSS);
             });
+            if(fixedSizeExists){
+                var remainder = 12-fixedSizeTotals;
+                var nonFixedCount = open-openFixed;
+                var remainderEach = Math.floor(remainder/nonFixedCount);
+                var remainderTaken = false;
+                el.each(function(index, element){
+                    if(fixedSizes[index]){
+                        $(element).addClass('col-' + currentMode + '-' + fixedSizes[index]);
+                    } else {
+                        // if this item is the last of the visible nonfixed and there is a remainder
+                        var leftOver = remainder - (remainderEach*nonFixedCount);
+                        if(leftOver > 0 && !remainderTaken) {
+                            $(element).addClass('col-' + currentMode + '-' + (remainderEach + leftOver));
+                            remainderTaken = true;
+                        } else{
+                            $(element).addClass('col-' + currentMode + '-' + remainderEach);
+                        }
+                    }
+                });
+            } else {
+                var each = 12/open;
+                var colCSS = 'col-' + currentMode + '-' + each;
+                el.each(function(index, element){
+                    $(element).addClass(colCSS);
+                });
+            }
+            console.log(fixedSizeExists);
         }
         
         // Set some variables in the very beginning for consistency
