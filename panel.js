@@ -78,7 +78,7 @@
             $(settings.buttonElement).html('');
             console.log(currentMode);
             if(modes.indexOf(currentMode) >= modes.indexOf(settings.onSize)){
-                $(settings.buttonElement).append('<div class="btn-group"></div>');
+                $(settings.buttonElement).append('<div class="btn-group btn-group-sm"></div>');
                 el.each(function(index, element){
                     var btnClass = settings.offClass; 
                     var title = $(element).attr('data-osf-panel');
