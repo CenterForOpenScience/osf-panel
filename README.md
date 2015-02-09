@@ -48,3 +48,13 @@ Here's a description of options:
         onSize : 'sm'                                               // Which size onwards to apply, it's best to start at sm.
     };
 ```
+
+### How to add fixed width columns
+
+There are potential scenarios where you need to keep a column a certain size despite the toggle state. For instance you might have a sidebar that needs to be 2 columns wide when visible regardless of what other columns are visible in the grid. For these cases you can hard code the column sizes. osf-panel will stick to these sizes when resizing and expand others to fill the blanks. The demo uses two of these. As with all grids you need to make sure that your numbers make sense and add up to 12. 
+
+```html
+    <div class="col-md-5" data-osf-panel="Second" data-osf-panel-col="3">
+    ...
+    </div>
+```
