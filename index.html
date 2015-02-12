@@ -73,9 +73,9 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="panel.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('*[data-osf-panel]').osfPanel({ buttonElement : '.switch', onSize : 'sm', onclick : function(item, event) { console.log(item, event);  } });
-        });         
+        $(document).ready(function () {
+            $('*[data-osf-panel]').osfPanel({ buttonElement : '.switch', onSize : 'sm', onclick : function (label, item, event) { console.log(this, label, item, event);  } });
+        });
     </script> 
 
   </body>
