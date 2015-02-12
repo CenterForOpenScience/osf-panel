@@ -46,8 +46,25 @@ Here's a description of options:
         onClass : 'btn-primary',                                    // The class to add to buttons for ON
         offClass : 'btn-default',                                   // The class to add to buttons for OFF
         onSize : 'sm'                                               // Which size onwards to apply, it's best to start at sm.
+        onclick : null                                              // Functio to run when a toggle button is clicked
     };
 ```
+
+### onclick()
+
+The onclick hook adds the ability to run your own functions when a user clicks on one of the toggle buttons. 
+Onclick hs the following arguments
+```javascript
+    onclick(label, item, event);
+```
+
+| Variable | Value |
+| ------------- | ------------- |
+| this  | is set to the jquery list of columns that are affected by the plugin. | 
+| label  | The text of the button as passed in by the data-osf-panel  | 
+| item  | the single $(element) jquery item | 
+| event  | Browser click event | 
+
 
 ### How to add fixed width columns
 
