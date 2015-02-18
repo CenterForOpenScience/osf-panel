@@ -98,8 +98,14 @@
         el.initialize = function () {
             el.each(function (index, element) {
                 var $el = $(element),
-                    cssStrings = $el.attr('class').split(' '),
+                    css  =  $el.attr('class'),
+                    cssStrings,
                     i;
+                if(css){
+                    cssStrings = css.split(' ');
+                } else {
+                    cssStrings = [];
+                }
                 if ($el.is(':visible')) {
                     $el.attr('data-osf-toggle', 'on');
                 }
