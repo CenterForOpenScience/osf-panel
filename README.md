@@ -36,6 +36,19 @@ Step 3: Initialize the plugin with javascript. Here you can add options. The mos
 </script>
 ```
 
+After the plugin initializes your column will have some data attributes added (You should not add them yourself, this is for reference): 
+```html
+<div data-osf-panel="View" class="col-md-6 col-sm-6 col-xs-12" data-osf-toggle="on" data-initial-state="on" data-css-cache="col-sm-6">
+…
+</div>
+```
+- **data-osf-toggle="on"** : Shows the current state, it will be 'on' or off
+- **data-initial-state="on"** : A cache for what the initial state was in case of adjusting visibility when reset. 
+- **data-css-cache=""** : A cache for other sizing classes so that when reset they go back to original classes.
+
+
+### Options
+
 Here's a description of options:
 
 ```javascript
