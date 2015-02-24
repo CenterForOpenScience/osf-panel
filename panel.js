@@ -15,7 +15,7 @@
             modes = ['xs', 'sm', 'md', 'lg'],
             size = settings.sizes,
             currentMode;
-        // Check what size we are on 
+        // Check what size we are on
         el.updateMode = function () {
             var width = $(window).width();
             if (width >= size.xs && width < size.sm) {
@@ -108,6 +108,10 @@
                 }
                 if ($el.is(':visible')) {
                     $el.attr('data-osf-toggle', 'on');
+                    $el.attr('data-initial-state', 'on');
+                } else {
+                    $el.attr('data-initial-state', 'off');
+                    $el.attr('data-osf-toggle', 'off');
                 }
                 $el.attr('data-css-cache', $el.attr('class'));
                 //remove all size related classes
@@ -120,12 +124,17 @@
             });
             el.createButtons();
         };
-        // Clean up the changes this plugin does. 
+        // Clean up the changes this plugin does.
         el.reset = function () {
             $('[data-osf-panel]').each(function (index, element) {
-                var $el = $(element),
-                    cache = $el.attr('data-css-cache');
-                $el.show();
+                var $el = $(element);
+                var cache = $el.attr('data-css-cache');
+                var initialState = $el.attr('data-initial-state');
+                if (initialState === 'on') {
+                    $el.show();
+                } else {
+                    $el.hide();
+                }
                 if (cache && cache.length > 0) {
                     $el.attr('class', cache);
                 }
