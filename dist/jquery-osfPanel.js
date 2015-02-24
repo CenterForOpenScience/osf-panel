@@ -73,33 +73,41 @@
                 }
                 $el.attr('class', cssStrings.join(' '));
             });
-            if (fixedSizeExists) {
-                remainder = 12 - fixedSizeTotals;
-                nonFixedCount = open - openFixed;
-                remainderEach = Math.floor(remainder / nonFixedCount);
-                remainderTaken = false;
+            // if mode is xs ignore sizes
+            if(currentMode === 'xs'){
                 el.each(function (index, element) {
-                    var $el = $(element);
-                    if (fixedSizes[index]) {
-                        $el.addClass('col-' + currentMode + '-' + fixedSizes[index]);
-                    } else {
-                        // if this item is the last of the visible nonfixed and there is a remainder
-                        leftOver = remainder - (remainderEach * nonFixedCount);
-                        if (leftOver > 0 && !remainderTaken) {
-                            $el.addClass('col-' + currentMode + '-' + (remainderEach + leftOver));
-                            remainderTaken = true;
-                        } else {
-                            $el.addClass('col-' + currentMode + '-' + remainderEach);
-                        }
-                    }
+                    $(element).addClass('col-xs-12');
                 });
             } else {
-                each = 12 / open;
-                colCSS = 'col-' + currentMode + '-' + each;
-                el.each(function (index, element) {
-                    $(element).addClass(colCSS);
-                });
+                if (fixedSizeExists) {
+                    remainder = 12 - fixedSizeTotals;
+                    nonFixedCount = open - openFixed;
+                    remainderEach = Math.floor(remainder / nonFixedCount);
+                    remainderTaken = false;
+                    el.each(function (index, element) {
+                        var $el = $(element);
+                        if (fixedSizes[index]) {
+                            $el.addClass('col-' + currentMode + '-' + fixedSizes[index]);
+                        } else {
+                            // if this item is the last of the visible nonfixed and there is a remainder
+                            leftOver = remainder - (remainderEach * nonFixedCount);
+                            if (leftOver > 0 && !remainderTaken) {
+                                $el.addClass('col-' + currentMode + '-' + (remainderEach + leftOver));
+                                remainderTaken = true;
+                            } else {
+                                $el.addClass('col-' + currentMode + '-' + remainderEach);
+                            }
+                        }
+                    });
+                } else {
+                    each = 12 / open;
+                    colCSS = 'col-' + currentMode + '-' + each;
+                    el.each(function (index, element) {
+                        $(element).addClass(colCSS);
+                    });
+                }
             }
+
         };
         // Set some variables in the very beginning for consistency
         el.initialize = function () {
