@@ -190,7 +190,7 @@
             var $this = $(this),
                 title = $this.text(),
                 $col = $('[data-osf-panel="' + title + '"]'),
-                buttonState =  $col.attr('data-osf-toggle') === 'on' ? true : false;
+                buttonState;
             if ($this.hasClass(settings.onClass)) {
                 $this.removeClass(settings.onClass).addClass(settings.offClass);
                 $col.attr('data-osf-toggle', 'off').hide();
@@ -199,6 +199,7 @@
                 $col.attr('data-osf-toggle', 'on').show();
             }
             el.adjustVisible();
+            buttonState =  $col.attr('data-osf-toggle') === 'on' ? true : false;
             if ($.isFunction(settings.onclick)) {
                 settings.onclick(event, title, buttonState, $this, $col);
             }
