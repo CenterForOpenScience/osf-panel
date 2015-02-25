@@ -194,7 +194,7 @@
             el.adjustVisible();
             buttonState =  $col.attr('data-osf-toggle') === 'on' ? true : false;
             if ($.isFunction(settings.onclick)) {
-                settings.onclick(event, title, buttonState, $this, $col);
+                settings.onclick.call(el, event, title, buttonState, $this, $col);
             }
         });
         $(window).resize(function () {
