@@ -181,18 +181,19 @@
         // Button on click
         $(document).on('click', settings.buttonElement + ' .btn', function (event) {
             var $this = $(this),
-            // toggle what is clicked
-                title = $this.text();
+                title = $this.text(),
+                $col = $('[data-osf-panel="' + title + '"]'),
+                buttonState =  $col.attr('data-osf-toggle') === 'on' ? true : false;
             if ($this.hasClass(settings.onClass)) {
                 $this.removeClass(settings.onClass).addClass(settings.offClass);
-                $('[data-osf-panel="' + title + '"]').attr('data-osf-toggle', 'off').hide();
+                $col.attr('data-osf-toggle', 'off').hide();
             } else if ($this.hasClass(settings.offClass)) {
                 $this.removeClass(settings.offClass).addClass(settings.onClass);
-                $('[data-osf-panel="' + title + '"]').attr('data-osf-toggle', 'on').show();
+                $col.attr('data-osf-toggle', 'on').show();
             }
             el.adjustVisible();
             if ($.isFunction(settings.onclick)) {
-                settings.onclick.call(el, title, $this, event);
+                settings.onclick(event, title, buttonState, $this, $col);
             }
         });
         $(window).resize(function () {
