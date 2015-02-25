@@ -68,15 +68,16 @@ Here's a description of options:
 The onclick hook adds the ability to run your own functions when a user clicks on one of the toggle buttons. 
 Onclick hs the following arguments
 ```javascript
-    onclick(label, item, event);
+    onclick(event, label, buttonState, item, column);
 ```
 
 | Variable | Value |
 | ------------- | ------------- |
 | this  | is set to the jquery list of columns that are affected by the plugin. | 
-| label  | The text of the button as passed in by the data-osf-panel  | 
-| item  | the single $(element) jquery item | 
 | event  | Browser click event | 
+| label  | The text of the button as passed in by the data-osf-panel  | 
+| item  | the single $(element) jquery item for the button | 
+| column  | the single $(element) jquery item for the column | 
 
 
 ### How to add fixed width columns
